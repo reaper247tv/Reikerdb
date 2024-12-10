@@ -1,5 +1,6 @@
 import express from "express";
-import routes from "./api/index.js";
+import bot from "./bot/bot.js";
+import apiRoutes from "./api/index.js";
 
 const app = express();
 
@@ -7,9 +8,13 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Routes
-app.use("/", routes);
+// API Routes
+app.use("/api", apiRoutes);
 
+// Start Telegram Bot
+bot;
+
+// Start the server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
